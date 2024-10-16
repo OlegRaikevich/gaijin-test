@@ -4,6 +4,7 @@ import argparse
 
 
 def main():
+    # Added the parser so that we can add a directory as an argument when running a script
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "directory",
@@ -15,6 +16,7 @@ def main():
     execute_commands(args.directory)
 
 
+# Explore directory tree and collect all python files
 def find_python_files(directory):
     python_files = []
 
@@ -26,6 +28,7 @@ def find_python_files(directory):
     return sorted(python_files)
 
 
+# Collect commands list from python file
 def extract_commands_list(file):
     with open(file, "r") as file:
         content = file.read()
@@ -34,6 +37,7 @@ def extract_commands_list(file):
         return local_dict.get('CMDS', [])
 
 
+# Run the command and write it down so you don't have to run it twice
 def execute_commands(directory):
     python_files = find_python_files(directory)
     executed_cmds = set()
